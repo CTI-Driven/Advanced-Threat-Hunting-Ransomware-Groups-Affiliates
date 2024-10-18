@@ -10,7 +10,7 @@ author: Nounou Mbeiri
 date: 2024/10/15
 tags:
   - attack.exfiltration
-  - attack.t1041
+  - attack.t1048
 logsource:
     product: windows
     category: process_creation
