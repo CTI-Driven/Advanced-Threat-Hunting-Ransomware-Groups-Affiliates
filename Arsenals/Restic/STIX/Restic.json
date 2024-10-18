@@ -28,6 +28,12 @@
       ],
       "object_refs": [
         "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20"
+      ],
+      "external_references": [
+        {
+          "source_name": "CTI-Driven",
+          "url": "https://github.com/CTI-Driven/Advanced-Threat-Hunting-Ransomware-Groups/tree/main/Arsenals/Restic"
+        }
       ]
     },
     {
