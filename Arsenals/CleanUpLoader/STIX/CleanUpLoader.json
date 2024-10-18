@@ -29,6 +29,12 @@
       ],
       "object_refs": [
         "malware--edd99695-8766-44d7-9de5-9b1451de0f8a"
+      ],
+      "external_references": [
+        {
+          "source_name": "CTI-Driven",
+          "url": "https://github.com/CTI-Driven/Advanced-Threat-Hunting-Ransomware-Groups/tree/main/Arsenals/CleanUpLoader"
+        }
       ]
     },
     {
