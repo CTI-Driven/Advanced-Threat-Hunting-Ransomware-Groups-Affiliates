@@ -4,6 +4,33 @@
   "type": "bundle",
   "objects": [
     {
+      "name": "Nounou Mbeiri",
+      "description": "MITRE ATT&CK Defender (MAD) | Cyber Threat Intelligence researcher | Collaborator in Cyber Threat Intelligence community (GINSEG) | Public Speaking",
+      "identity_class": "individual",
+      "contact_information": "Twitter: @Nounou_Mbeiri",
+      "id": "identity--1dd7bca6-cef5-4395-826f-64994241b3cf",
+      "type": "identity",
+      "spec_version": "2.1",
+      "created": "2021-03-10T10:00:00.000Z",
+      "modified": "2021-03-10T10:00:00.000Z"
+    },
+    {
+      "name": "Restic | Data Exfiltration",
+      "description": "Restic is an open-source backup tool that supports backing up data to various storage types, including local directories, SFTP servers, and cloud services like Amazon S3, Google Cloud Storage, and Microsoft Azure. Recently, it has been observed in use by the BlackCat Ransomware Affiliates.",      "published": "2024-10-13T13:25:24+01:00",
+      "id": "report--b73c0a8b-42e3-47b8-9044-1650d87da02f",
+      "type": "report",
+      "spec_version": "2.1",
+      "created_by_ref": "identity--1dd7bca6-cef5-4395-826f-64994241b3cf",
+      "created": "2024-10-18T13:25:24+01:00",
+      "modified": "2024-10-18T13:25:24+01:00",
+      "report_types": [
+        "malware"
+      ],
+      "object_refs": [
+        "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20"
+      ]
+    },
+    {
       "id": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
       "type": "tool",
       "spec_version": 2.1,
@@ -26,7 +53,7 @@
       "tool_types": [
         "information-gathering"
       ],
-      "name": "restic",
+      "name": "Restic",
       "description": "Restic is an open-source backup tool that supports backing up data to various storage types, including local directories, SFTP servers, and cloud services like Amazon S3, Google Cloud Storage, and Microsoft Azure. Recently, it has been observed in use by the BlackCat Ransomware group.",
       "tool_version": "",
       "kill_chain_phases": [
@@ -109,11 +136,16 @@
       "revoked": false,
       "confidence": 0,
       "lang": "en",
-      "external_references": [],
+      "external_references": [
+        {
+          "source_name": "",
+          "url": "https://github.com/CTI-Driven/Advanced-Threat-Hunting-Ransomware-Groups/blob/main/Arsenals/Restic/SIGMA/Detect%20the%20Use%20of%20Restic%20Backup%20too%20for%20Data%20Exfiltration.yaml"
+        }
+      ],
       "object_marking_refs": [],
       "granular_markings": [],
       "name": "SIGMA",
-      "description": ""
+      "description": "title: Detect the Use of Restic Backup too for Data Exfiltration\nid: 12345678-1234-1234-1234-123456789012\ndescription: |\n  Restic is an open-source backup tool that supports backing up data to various storage types, including local directories, SFTP servers, and cloud services like Amazon S3, Google Cloud Storage, and Microsoft Azure. Recently, it has been observed in use by the BlackCat Ransomware group.\nstatus: experimental\nreferences:\n  - https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/#exfiltration\n  - https://restic.net/\nauthor: Nounou Mbeiri\ndate: 2024/10/15\ntags:\n  - attack.exfiltration\n  - attack.t1048\nlogsource:\n    product: windows\n    category: process_creation\ndetection:\n  selection1:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" :/\"\n      - \" init\"\n  selection2:\n    CommandLine|contains|all:\n      - \" --repo\"\n      - \" :/\"\n      - \" init\"\n  selection3:\n    CommandLine|contains:\n      - \" backup\"\n      - \" init\"\n  parameter1:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \"sftp:\"\n  parameter2:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" rest:http\"\n  parameter3:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" s3:s3.\"\n      - \"amazonaws\"\n  parameter4:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" s3:http\"\n  parameter5:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" swift:\"\n  parameter6:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" b2:\"\n  parameter7:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" azure:\"\n  parameter8:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" gs:\"\n  parameter9:\n    CommandLine|contains|all:\n      - \" -r\"\n      - \" rclone:\"\n  condition: ((selection1 or selection2) or (selection3 and 1 of parameter*))\nfalsepositives:\n  - Legitimate use of Restic for backup purposes\nlevel: high"
     },
     {
       "id": "course-of-action--bcb341a1-2501-4726-85f2-fdba0c755297",
@@ -126,11 +158,16 @@
       "revoked": false,
       "confidence": 0,
       "lang": "en",
-      "external_references": [],
+      "external_references": [
+        {
+          "source_name": "",
+          "url": "https://github.com/CTI-Driven/Advanced-Threat-Hunting-Ransomware-Groups/blob/main/Arsenals/Restic/KQL/Detect%20the%20Use%20of%20Restic%20for%20Backup%20Repository%20Initiation%20and%20Data%20Exfiltration.kql.sql"
+        }
+      ],
       "object_marking_refs": [],
       "granular_markings": [],
       "name": "(KQL) Advanced Hunting Query",
-      "description": ""
+      "description": "Detect the Use of Restic Backup too for Data Exfiltration"
     },
     {
       "source_ref": "threat-actor--40a54aa9-3403-42f2-9eb9-86e1e6d0857a",
