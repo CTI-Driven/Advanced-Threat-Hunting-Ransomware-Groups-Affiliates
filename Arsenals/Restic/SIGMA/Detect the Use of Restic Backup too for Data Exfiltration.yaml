@@ -1,0 +1,72 @@
+title: Detect the Use of Restic Backup too for Data Exfiltration
+id: 12345678-1234-1234-1234-123456789012
+description: |
+  Restic is an open-source backup tool that supports backing up data to various storage types, including local directories, SFTP servers, and cloud services like Amazon S3, Google Cloud Storage, and Microsoft Azure. Recently, it has been observed in use by the BlackCat Ransomware group.
+status: experimental
+references:
+  - https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/#exfiltration
+  - https://restic.net/
+author: Nounou Mbeiri
+date: 2024/10/15
+tags:
+  - attack.exfiltration
+  - attack.t1041
+logsource:
+    product: windows
+    category: process_creation
+detection:
+  selection1:
+    CommandLine|contains|all:
+      - " -r"
+      - " :/"
+      - " init"
+  selection2:
+    CommandLine|contains|all:
+      - " --repo"
+      - " :/"
+      - " init"
+  selection3:
+    CommandLine|contains:
+      - " backup"
+      - " init"
+  parameter1:
+    CommandLine|contains|all:
+      - " -r"
+      - "sftp:"
+  parameter2:
+    CommandLine|contains|all:
+      - " -r"
+      - " rest:http"
+  parameter3:
+    CommandLine|contains|all:
+      - " -r"
+      - " s3:s3."
+      - "amazonaws"
+  parameter4:
+    CommandLine|contains|all:
+      - " -r"
+      - " s3:http"
+  parameter5:
+    CommandLine|contains|all:
+      - " -r"
+      - " swift:"
+  parameter6:
+    CommandLine|contains|all:
+      - " -r"
+      - " b2:"
+  parameter7:
+    CommandLine|contains|all:
+      - " -r"
+      - " azure:"
+  parameter8:
+    CommandLine|contains|all:
+      - " -r"
+      - " gs:"
+  parameter9:
+    CommandLine|contains|all:
+      - " -r"
+      - " rclone:"
+  condition: ((selection1 or selection2) or (selection3 and 1 of parameter*))
+falsepositives:
+  - Legitimate use of Restic for backup purposes
+level: high

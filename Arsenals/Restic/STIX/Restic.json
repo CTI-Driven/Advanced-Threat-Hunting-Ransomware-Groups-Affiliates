@@ -1,0 +1,203 @@
+{
+  "spec_version": "2.1",
+  "id": "bundle--f41d7025-bd36-49d8-94e2-099a9c634448",
+  "type": "bundle",
+  "objects": [
+    {
+      "id": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "type": "tool",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--b1dbaea4-51ba-4a18-8dac-57a0f752728a",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [
+        {
+          "source_name": "",
+          "url": " https://restic.net/"
+        }
+      ],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "aliases": [],
+      "tool_types": [
+        "information-gathering"
+      ],
+      "name": "restic",
+      "description": "Restic is an open-source backup tool that supports backing up data to various storage types, including local directories, SFTP servers, and cloud services like Amazon S3, Google Cloud Storage, and Microsoft Azure. Recently, it has been observed in use by the BlackCat Ransomware group.",
+      "tool_version": "",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+          "phase_name": "actions-on-objectives"
+        }
+      ]
+    },
+    {
+      "id": "threat-actor--40a54aa9-3403-42f2-9eb9-86e1e6d0857a",
+      "type": "threat-actor",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--c3a1f508-3709-4c55-8782-e159d81e0518",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [
+        {
+          "source_name": "",
+          "url": "https://app.tidalcyber.com/groups/33159d02-a1ce-49ec-a381-60b069db66f7"
+        }
+      ],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "threat_actor_types": [],
+      "name": "BlackCat Ransomware Affiliates",
+      "description": "This object represents the BlackCat/ALPHV Ransomware-as-a-Service (“RaaS”) apex group and the behaviors associated with its various affiliate ransomware operators. Specific affiliate operations defined by the research community will be tracked as separate objects.\n\nResearchers first observed BlackCat ransomware (AKA ALPHV or Noberus) in November 2021. An April 2022 U.S. FBI advisory linked BlackCat’s developers and money launderers to the defunct Blackmatter and Darkside ransomware operations (the latter was responsible for the major 2021 Colonial Pipeline incident).[FBI BlackCat April 19 2022] As of September 2023, BlackCat is believed to be responsible for attacking organizations globally and in virtually every major sector, and it consistently claims some of the highest victim tallies of any RaaS. According to data collected by the ransomwatch project and analyzed by Tidal, BlackCat actors publicly claimed 233 victims in 2022, the third most of any ransomware operation in the dataset (considerably below Clop (558) but well above Hive (181)), and it already surpassed that number by July of 2023.[GitHub ransomwatch] Like many RaaS, BlackCat actors threaten to leak exfiltrated victim data, but they also threaten to carry out denial of service attacks if victims do not pay timely ransoms.[BlackBerry BlackCat Threat Overview]\n\nBlackCat developers have regularly evolved the namesake ransomware over time, and collaboration with affiliates means that a large number and variety of tools & TTPs are observed during intrusions involving BlackCat. BlackCat became the first prominent ransomware family to transition to the Rust programming language in 2022, which researchers assess provides greater customization and defense evasion capabilities and faster performance.[X-Force BlackCat May 30 2023][FBI BlackCat April 19 2022] A BlackCat variant named Sphynx emerged in early 2023, featuring multiple defense evasion-focused enhancements. In Q3 2023, public reports suggested that Scattered Spider (AKA 0ktapus or UNC3944), a group attributed to several prominent intrusions involving telecommunications, technology, and casino entities, had begun to use BlackCat/Sphynx ransomware during its operations.[Caesars Scattered Spider September 13 2023][BushidoToken Scattered Spider August 16 2023]",
+      "aliases": [],
+      "roles": [],
+      "goals": [],
+      "first_seen": "2024-10-16T18:32:00+01:00",
+      "last_seen": "2024-10-16T18:32:00+01:00",
+      "sophistication": "",
+      "resource_level": "",
+      "primary_motivation": "",
+      "secondary_motivations": [],
+      "personal_motivations": []
+    },
+    {
+      "id": "indicator--37335a34-ddf1-41ae-a0c4-1765d6ba3401",
+      "type": "indicator",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--086cea8d-7da8-4981-b941-0a9009d3b27b",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [
+        {
+          "source_name": "",
+          "url": "https://www.virustotal.com/gui/file/1b25f42436b0c9842a638f19c6678e3592af08d554bc06983b572104c56612db/detection/f-1b25f42436b0c9842a638f19c6678e3592af08d554bc06983b572104c56612db-1725584223"
+        }
+      ],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "indicator_types": [],
+      "name": "569acc7bd4a2a7606666d37a3bda1d72",
+      "description": "restic_0.17.1_windows_amd64.exe",
+      "pattern": "569acc7bd4a2a7606666d37a3bda1d72",
+      "pattern_type": "stix",
+      "pattern_version": "",
+      "valid_from": "2024-10-16T18:32:00+01:00",
+      "valid_until": "2024-10-16T18:32:00+01:00",
+      "kill_chain_phases": []
+    },
+    {
+      "id": "course-of-action--8cb96356-27f0-43e0-a8ff-2049c00ebd3f",
+      "type": "course-of-action",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--f64e1e79-f789-43cf-9fdd-cd790f82f549",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "name": "SIGMA",
+      "description": ""
+    },
+    {
+      "id": "course-of-action--bcb341a1-2501-4726-85f2-fdba0c755297",
+      "type": "course-of-action",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--f64e1e79-f789-43cf-9fdd-cd790f82f549",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "name": "(KQL) Advanced Hunting Query",
+      "description": ""
+    },
+    {
+      "source_ref": "threat-actor--40a54aa9-3403-42f2-9eb9-86e1e6d0857a",
+      "target_ref": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "relationship_type": "uses",
+      "type": "relationship",
+      "created": "2024-10-18T14:21:27.427Z",
+      "modified": "2024-10-18T14:21:27.427Z",
+      "id": "relationship--6ed11a65-c415-470a-b617-c7bc530dcdbd",
+      "targetObjectType": "tool"
+    },
+    {
+      "source_ref": "indicator--37335a34-ddf1-41ae-a0c4-1765d6ba3401",
+      "target_ref": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "relationship_type": "indicates",
+      "type": "relationship",
+      "created": "2024-10-18T14:22:02.265Z",
+      "modified": "2024-10-18T14:22:02.265Z",
+      "id": "relationship--7ff44233-3c18-4810-bb7f-39af1627f160",
+      "targetObjectType": "tool"
+    },
+    {
+      "source_ref": "course-of-action--bcb341a1-2501-4726-85f2-fdba0c755297",
+      "target_ref": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "relationship_type": "mitigates",
+      "type": "relationship",
+      "created": "2024-10-18T14:23:07.182Z",
+      "modified": "2024-10-18T14:23:07.182Z",
+      "id": "relationship--12b08bd9-49ba-4ae3-b005-5773f10445d2",
+      "targetObjectType": "tool"
+    },
+    {
+      "source_ref": "course-of-action--8cb96356-27f0-43e0-a8ff-2049c00ebd3f",
+      "target_ref": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "relationship_type": "mitigates",
+      "type": "relationship",
+      "created": "2024-10-18T14:34:52.104Z",
+      "modified": "2024-10-18T14:34:52.104Z",
+      "id": "relationship--3590716e-4242-4f22-845f-c348fa6b589b",
+      "targetObjectType": "tool"
+    },
+    {
+      "id": "course-of-action--fb3292bf-1c89-46fc-b76f-9e014c060d75",
+      "type": "course-of-action",
+      "spec_version": 2.1,
+      "created_by_ref": "identity--f64e1e79-f789-43cf-9fdd-cd790f82f549",
+      "labels": [],
+      "created": "2024-10-16T18:32:00+01:00",
+      "modified": "2024-10-16T18:32:00+01:00",
+      "revoked": false,
+      "confidence": 0,
+      "lang": "en",
+      "external_references": [],
+      "object_marking_refs": [],
+      "granular_markings": [],
+      "name": "Mitigations",
+      "description": "Network Traffic Monitoring: \n\nUse intrusion detection/prevention systems (IDS/IPS) to monitor for unusual outbound traffic. \n\nMonitor for traffic patterns typical of Restic, such as file transfers to cloud storage platforms.\n\nData Loss Prevention (DLP): Deploy DLP solutions to monitor, alert, and block sensitive data exfiltration, especially toward unauthorized external servers.\n\nDeep Packet Inspection (DPI): DPI solutions can help inspect the content of network packets and detect exfiltration attempts."
+    },
+    {
+      "source_ref": "course-of-action--fb3292bf-1c89-46fc-b76f-9e014c060d75",
+      "target_ref": "tool--dadb7b7d-1b26-4ae5-b9ca-569e2cc3cc20",
+      "relationship_type": "mitigates",
+      "type": "relationship",
+      "created": "2024-10-18T14:41:57.010Z",
+      "modified": "2024-10-18T14:41:57.010Z",
+      "id": "relationship--26bd5a04-5f31-4a75-85a1-e71ae4009a62",
+      "targetObjectType": "tool"
+    }
+  ]
+}
