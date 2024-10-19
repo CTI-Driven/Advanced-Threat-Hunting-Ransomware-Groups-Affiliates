@@ -130,7 +130,7 @@ The Oyster Backdoor (CleanUpLoader) employs a range of techniques from the MITRE
         Uses cmd.exe for executing system commands and scripts.
 
 3. **Persistence**
-    - **T1060 - Registry Run Keys / Startup Folder**:  
+    - **T1547.001 - Registry Run Keys / Startup Folder**:  
         Creates startup items or modifies registry entries to ensure persistence.
     - **T1053.005 - Scheduled Task/Job: Scheduled Task**:  
         Creates scheduled tasks that automatically run malicious components at regular intervals to ensure persistence.
