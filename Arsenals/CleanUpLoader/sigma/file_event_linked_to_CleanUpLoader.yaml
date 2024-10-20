@@ -26,7 +26,6 @@ detection:
       - 'CleanUp30.dll'
     TargetFilename|contains:
       - '\Temp\'
-      - '\Downloads'
   condition: selection
 falsepositives:
   - Legitimate software installations or updates that use these CleanUp.dll
