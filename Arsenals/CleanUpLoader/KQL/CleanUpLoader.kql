@@ -1,0 +1,60 @@
+/Title: Detect Files, Digital Certificates, NetworkEvents, and ProcessEvents Linked to CleanUpLoader(Oyster Backdoor)
+//Description:
+//CleanUpLoader, also known as Oyster or Broomstick, is a versatile backdoor malware used in various cyber attack campaigns. It was first identified in September 2023 by IBM researchers. This malware is typically delivered through fake software installers, such as those for Microsoft Teams or Google Chrome.
+//Once installed, CleanUpLoader establishes communication with command-and-control (C2) servers, allowing attackers to maintain persistence, gather information, and exfiltrate data. It has been observed in use by threat actors like Rhysida and Wizard Spider.
+//
+//Comment: A true positive would involve the following:
+//-> schtasks.exe /create /tn ClearMngs /tr "rundll32 '<location of binary>\CleanUp30.dll',Test" /sc hourly /mo 3 /f
+//-> powershell.exe -Command "$ws -New-Object -ComObject WScript.Shell; $s - $ws.CreateShortcut ('C:\Users\<User>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\DiskCleanUp.1nk'); $s.TargetPath 'C:\Users\<User>\AppData\Local\Temp\CleanUp.dll, Test'; $s.Save()
+//-> HTTP connection established to the domain "supfoundrysettlers[.]us" by the file "CleanUp30.dll,"
+//-> //-> C2 connection to the IP address "195.85.114[.]193" over ports 4288, 4043, and 777
+//-> HTTP POST requests to /api/connectivity, /api/session, and /api/connect used by CleanUpLoader
+//-> Commands intended to gather information on the compromised host and domain environment, such as "whoami.exe," "net1 group 'domain computers' /domain," "nltest.exe /domain_trusts," and "tasklist.exe"
+//-> HTTP POST requests to endpoints like /api/connectivity, /api/session, and /api/connect used by CleanUpLoader
+//References:
+//   - https://www.reliaquest.com/blog/5-malware-variants-you-should-know/
+//    - https://go.recordedfuture.com/hubfs/reports/cta-2024-1009.pdf
+//    - https://www.rapid7.com/blog/post/2024/06/17/malvertising-campaign-leads-to-execution-of-oyster-backdoor/
+//    - https://app.any.run/tasks/aa15e125-38b8-44d8-add9-54e21e6813bb
+//
+//QKL Advanced hunting query:
+let timeframe = 24hr;
+// Detection 1: Valid digital certificates used by CleanUpLoader
+let ValidDigitalCertificates = (
+    DeviceProcessEvents
+    | where Timestamp >= ago(timeframe)
+    | invoke FileProfile()
+    | where Signer has_all ("Shanxi","Yanghua","Furnishings") or Signer has_all ("Shantou","Chenghai","Rongsheng")
+);
+// Detection 2: C2 HTTP POST requests Linked to CleanUpLoader
+let C2HttpPostRequest = (
+    DeviceNetworkEvents
+    | where Timestamp >= ago(timeframe)
+    | where ActionType == "HttpConnectionInspected"
+    | extend AdditionalFields_info = parse_json(AdditionalFields)
+    | where AdditionalFields_info.method == "POST"
+    and AdditionalFields_info.uri in ("/api/connectivity", "/api/session", "/api/connect")
+);
+// Detection 3: Process commands events Linked to CleanUpLoader
+let ProcessCommandsEvents = (
+    DeviceProcessEvents
+    | where Timestamp >= ago(timeframe)
+    | where (  (ProcessCommandLine has_all ("rundll32.exe", "%s", "Test"))
+            or (ProcessCommandLine contains "rundll32.exe" and ProcessCommandLine has_any ("CleanUp.dll", "CleanUp30.dll"))
+            or (ProcessCommandLine has_all ("schtasks.exe", "/create", "ClearMngs", "rundll32", ".dll", "Test"))
+            or (ProcessCommandLine has_all ("powershell.exe", "schtasks.exe", "CreateShortcut", ".lnk", "rundll32", ".dll", "Test"))
+        )
+);
+// Detection 4: File creation events Linked to CleanUpLoader
+let FileCreationEvents = (
+    DeviceFileEvents
+    | where Timestamp >= ago(timeframe)
+    | where ActionType == "FileCreated"
+    | where FileName in ("CleanUp.dll", "CleanUp30.dll") and FolderPath has_any ("\\Temp\\")
+);
+// Combine all detections
+let Suspicious_OysterBackdoorActivities = (
+    union ValidDigitalCertificates, C2HttpPostRequest, ProcessCommandsEvents, FileCreationEvents
+    | summarize arg_max(Timestamp, *) by DeviceId
+    | order by Timestamp asc
+);Suspicious_OysterBackdoorActivities

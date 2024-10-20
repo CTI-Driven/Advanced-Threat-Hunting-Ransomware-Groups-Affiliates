@@ -1,0 +1,32 @@
+title: Detect DLL File Creation Events Linked to CleanUpLoader
+id: 87654321-4321-8765-4321-876543218765
+status: experimental
+description: Detects the creation of specific DLL files in Temp or Downloads folders, potentially linked to CleanUpLoader(Oyster Backdoor) activity.
+references:
+    - https://www.reliaquest.com/blog/5-malware-variants-you-should-know/
+    - https://go.recordedfuture.com/hubfs/reports/cta-2024-1009.pdf
+    - https://www.rapid7.com/blog/post/2024/06/17/malvertising-campaign-leads-to-execution-of-oyster-backdoor/
+    - https://app.any.run/tasks/aa15e125-38b8-44d8-add9-54e21e6813bb
+author: Nounou Mbeiri
+date: 2024/10/15
+tags:
+    - attack.discovery
+    - attack.command_and_control
+    - attack.exfiltration
+    - attack.t1040
+    - attack.t1041
+    - attack.t1071
+logsource:
+    product: windows
+    category: file_event
+detection:
+  selection:
+    TargetFilename|endswith:
+      - 'CleanUp.dll'
+      - 'CleanUp30.dll'
+    TargetFilename|contains:
+      - '\Temp\'
+  condition: selection
+falsepositives:
+  - Legitimate software installations or updates that use these CleanUp.dll
+level: medium
