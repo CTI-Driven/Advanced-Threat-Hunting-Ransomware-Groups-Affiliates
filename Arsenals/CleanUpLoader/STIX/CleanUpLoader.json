@@ -286,6 +286,24 @@
       "kill_chain_phases": []
     },
     {
+      "id": "attack-pattern--eb70ee02-84ed-4bd7-9582-31923462232f",
+      "type": "attack-pattern",
+      "spec_version": 2.1,
+      "created": "2024-10-13T13:25:24+01:00",
+      "modified": "2024-10-13T13:25:24+01:00",
+ 
+      "external_references": [
+        {
+          "source_name": "",
+          "url": "https://attack.mitre.org/techniques/T1547/001/"
+        }
+      ],
+
+      "name": "Persistence - T1547.001 : Registry Run Keys / Startup Folder ",
+      "description": "The Oyster/CleanUpLoader malware leverages T1547.001 - Registry Run Keys / Startup Folde to Creates a shortcut to ensure execution at startup.",
+      "kill_chain_phases": []
+    },
+    {
       "id": "attack-pattern--db9269b2-63c6-4fd0-a371-80cbef457af0",
       "type": "attack-pattern",
       "spec_version": 2.1,
@@ -628,6 +646,16 @@
       "created": "2024-10-14T18:36:05.279Z",
       "modified": "2024-10-14T18:36:05.279Z",
       "id": "relationship--81eca315-e90a-4f41-bc5c-9ac40584be7a",
+      "targetObjectType": "malware"
+    },
+    {
+      "source_ref": "attack-pattern--eb70ee02-84ed-4bd7-9582-31923462232f",
+      "target_ref": "malware--edd99695-8766-44d7-9de5-9b1451de0f8a",
+      "relationship_type": "uses",
+      "type": "relationship",
+      "created": "2024-10-14T18:36:05.279Z",
+      "modified": "2024-10-14T18:36:05.279Z",
+      "id": "relationship--33969643-4e5b-4fcf-82b5-9ba23f2abcee",
       "targetObjectType": "malware"
     }
   ]
